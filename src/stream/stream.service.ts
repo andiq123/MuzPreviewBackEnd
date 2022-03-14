@@ -28,7 +28,7 @@ export class StreamService {
 
     return this.http
       .get(link, {
-        responseType: 'arraybuffer',
+        responseType: 'stream',
       })
       .pipe(
         map(async (response) => {
