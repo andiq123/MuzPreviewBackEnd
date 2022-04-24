@@ -24,7 +24,7 @@ export class SongsParser {
   get songs(): Song[] {
     const results = this.parsedHtml.querySelector('.result');
     return results.querySelectorAll('.i').map((x) => {
-      const artist = x.querySelector('.title').text;
+      const artist = x.querySelector('.title').text.replace('—', '-');
       const title = x.querySelector('.tt').text;
       const duration = x.querySelector('.dur').text;
       const streamUrl = x.querySelector('.fa-download').attributes.href;
