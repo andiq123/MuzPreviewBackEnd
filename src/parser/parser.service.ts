@@ -28,7 +28,9 @@ export class ParserService {
       const data = await readFile(filePath);
       return this.getPaginationAndSongs(data);
     }
-    return this.http.get(`${this.searchUrl}?s=${query}&p=${page}`).pipe(
+
+    const encodedUrl = encodeURI(`${this.searchUrl}?s=${query}&p=${page}`);
+    return this.http.get(encodedUrl).pipe(
       map(async (response) => {
         if (this.debugMode) {
           await writeFile(filePath, response.data);
