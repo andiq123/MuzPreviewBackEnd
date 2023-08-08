@@ -11,9 +11,9 @@ import { SongsParser } from './utils/songs-parser';
 
 @Injectable()
 export class ParserService {
-  private baseUrl = 'https://stand.hitplayer.ru/';
-  private searchUrl = this.baseUrl + '';
-  private debugMode = false;
+  private baseUrl = 'https://musify.club/';
+  private searchUrl = this.baseUrl + 'search?searchText=';
+  private debugMode = true;
 
   constructor(private http: HttpService) {}
 
@@ -29,7 +29,8 @@ export class ParserService {
       return this.getPaginationAndSongs(data);
     }
 
-    const encodedUrl = encodeURI(`${this.searchUrl}?s=${query}&p=${page}`);
+    const encodedUrl = encodeURI(this.searchUrl + query);
+    console.log(encodedUrl);
     return this.http.get(encodedUrl).pipe(
       map(async (response) => {
         if (this.debugMode) {

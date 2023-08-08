@@ -22,14 +22,20 @@ export class SongsParser {
   }
 
   get songs(): Song[] {
-    const results = this.parsedHtml.querySelector('.result');
-    return results.querySelectorAll('.i').map((x) => {
-      const artist = x.querySelector('.title').text.replace('—', '-');
-      const title = x.querySelector('.tt').text;
-      const duration = x.querySelector('.dur').text;
-      const streamUrl = x.querySelector('.fa-download').attributes.href;
+    const results = this.parsedHtml.querySelectorAll('.playlist__item');
+
+    return results.map((x) => {
+      const artist = x.getAttribute('data-artist').valueOf();
+      const title = x.getAttribute('data-name').valueOf();
+      const streamUrl =
+        'https://musify.club' +
+        x.querySelector('.play').getAttribute('data-url').valueOf();
+      const duration = x
+        .querySelectorAll('.track__details')[1]
+        .querySelector('.text-muted').text;
+
       return {
-        id: uuid().toString(),
+        id: uuid(),
         artist,
         title,
         duration,
