@@ -30,7 +30,6 @@ export class ParserService {
     }
 
     const encodedUrl = encodeURI(this.searchUrl + query);
-    console.log(encodedUrl);
     return this.http.get(encodedUrl).pipe(
       map(async (response) => {
         if (this.debugMode) {
