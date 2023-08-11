@@ -13,7 +13,7 @@ import { SongsParser } from './utils/songs-parser';
 export class ParserService {
   private baseUrl = 'https://musify.club/';
   private searchUrl = this.baseUrl + 'search?searchText=';
-  private debugMode = true;
+  private debugMode = false;
 
   constructor(private http: HttpService) {}
 
